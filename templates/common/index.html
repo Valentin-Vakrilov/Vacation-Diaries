@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <form method="GET" action="" id="search">
+        {{ search_form.vacation }}
+        {% csrf_token %}
+        <button type="submit">Search</button>
+    </form>
+    <section id="hero">
+        <i class="fas fa-globe-europe"></i>
+        <h1>Explore some wonderful destinations</h1>
+        <i class="fas fa-globe-europe"></i>
+    </section>
+
+    {% if vacation_details %}
+        <ul>
+            {% for field in vacation_details %}
+                <li>
+                    <div id="card">
+                        <a href="{% url "vacation_details" field.vacation.pk %}">
+                            {{ field.vacation.destination }}
+                            <button type="submit">Explore vacation <i class="fas fa-arrow-alt-circle-right"></i>
+                            </button>
+                        </a>
+
+                        <div>
+                            {% if field.main_photo %}
+                                <img src="{{ field.main_photo.photo_main.url }}"
+                                     alt="{{ field.vacation.destination }} Main Photo">
+                            {% else %}
+                                <img src="../../static/app_images/no_main_image.png" alt="No main image">
+                            {% endif %}
+                        </div>
+
+                        <span>Total Likes: {{ field.total_likes }}</span>
+
+                        {% if user.is_authenticated and field.main_photo.pk %}
+                            {% if user in field.main_photo.likes.all %}
+                                <a href="{% url "photo_like_toggle" field.main_photo.pk %}">
+                                    <button type="submit" id="btn">Unlike Picture</button>
+                                </a>
+                            {% else %}
+                                <a href="{% url "photo_like_toggle" field.main_photo.pk %}">
+                                    <button type="submit" id="btn">Like Picture</button>
+                                </a>
+                            {% endif %}
+                        {% endif %}
+
+                        <div>
+                            {% if field.comments.count > 0 %}
+                                <h4>Comments</h4>
+                                <ul>
+                                    {% for comment in field.comments %}
+                                        <li>
+                                            <div>
+                                                <p>{{ comment.user.username }} posted
+                                                    on {{ comment.publication_date_and_time }}</p>
+                                                <p>{{ comment.comment_text }}</p>
+                                                {% if comment.user == request.user %}
+                                                    <div id="edit-delete-btns">
+                                                        <a href="{% url "photo_comment_edit" comment.pk %}">
+                                                            <button type="submit" id="btn">Edit Comment</button>
+                                                        </a>
+                                                        <a href="{% url "photo_comment_delete" comment.pk %}">
+                                                            <button type="submit" id="btn">Delete Comment</button>
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No comments yet</p>
+                            {% endif %}
+                        </div>
+
+                        {% if user.is_authenticated and field.main_photo %}
+                            <a href="{% url "photo_comment_add" field.main_photo.pk %}">
+                                <button type="submit" id="btn">Add comment</button>
+                            </a>
+                        {% endif %}
+
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <div id="no-destination">
+            <p>Sorry, we don't have a destination with that name!</p>
+            <a href="{% url "index" %}">
+                <button type="submit" id="btn">Back to all vacations</button>
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}

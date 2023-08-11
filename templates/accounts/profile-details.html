@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div id="profile-details">
+        <div>
+            {% if profile.image %}
+                <img src="{{ profile.image }}" alt="Profile picture">
+            {% else %}
+                <img src="/static/app_images/no_profile_image.png" alt="No profile picture">
+            {% endif %}
+        </div>
+
+        <h4>
+            Username: {{ profile.user.username }}
+        </h4>
+
+        <h4>
+            Email: {{ profile.user.email }}
+        </h4>
+
+        <h4>
+            {% if object.first_name is not None %}
+                First name: {{ object.first_name }}
+            {% else %}
+                First name: Not specified
+            {% endif %}
+        </h4>
+
+        <h4>
+            {% if object.last_name is not None %}
+                Last name: {{ object.last_name }}
+            {% else %}
+                Last name: Not specified
+            {% endif %}
+        </h4>
+
+        <h4>
+            {% if object.age is not None %}
+                Age: {{ object.age }}
+            {% else %}
+                Age: Not specified
+            {% endif %}
+        </h4>
+
+        <h4>
+            {% if object.gender is not None %}
+                Gender: {{ object.gender }}
+            {% else %}
+                Gender: Not specified
+            {% endif %}
+        </h4>
+
+        {% if user == profile.user %}
+            <div id="buttons">
+                <a href="{% url "change_password" %}">
+                    <button type="submit" id="btn">
+                        Change User Password
+                    </button>
+                </a>
+
+                <a href="{% url "profile_edit" request.user.pk %}">
+                    <button type="submit" id="btn">
+                        Edit Profile
+                    </button>
+                </a>
+
+                <a href="{% url "profile_delete" request.user.pk %}">
+                    <button type="submit" id="btn">
+                        Delete Profile
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

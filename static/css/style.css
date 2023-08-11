@@ -1,0 +1,297 @@
+@import url("https://use.fontawesome.com/releases/v5.6.3/css/all.css");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #d8f1f5;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin: 18px 6px;
+    padding: 12px;
+    background-color: aliceblue;
+}
+
+header > nav {
+    display: flex;
+}
+
+header > nav > ul {
+    display: flex;
+    flex-direction: row;
+    gap: 54px;
+    align-items: center;
+}
+
+#logged {
+    margin-left: 250px;
+}
+
+#not-logged {
+    margin-left: 800px;
+}
+
+header > nav > ul > li {
+    list-style: none;
+    font-size: 28px;
+    text-decoration: none;
+}
+
+header > nav > ul > li > a{
+    text-decoration: none;
+}
+
+#logo > img {
+    height: 125px;
+    width: 200px;
+    object-fit: cover;
+}
+
+#search {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 36px;
+}
+
+#search > input {
+    height: 24px;
+    width: 250px;
+    font-style: italic;
+    background-color: aliceblue;
+}
+
+#search > button {
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: aliceblue;
+    width: 72px;
+}
+
+#hero {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 36px;
+    gap: 48px;
+}
+
+#hero > i {
+    align-items: flex-start;
+}
+
+body > main > ul {
+    padding: 0;
+}
+
+body > main > ul > li {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 48px;
+}
+
+#card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+#card > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 24px;
+    color: black;
+}
+
+#card > a > button {
+    font-size: 14px;
+    background-color: aliceblue;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+#card > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+#card > div > img {
+    height: 600px;
+    margin-bottom: 12px;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: aliceblue;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    margin: 6px;
+    gap: 24px;
+}
+
+#links, #social, #trade-mark{
+    display: flex;
+    flex-direction: row;
+}
+
+#social {
+    font-size: 24px;
+    gap: 24px;
+    justify-content: center;
+}
+
+#social > i:hover {
+    cursor: pointer;
+}
+
+#links, #trade-mark {
+    justify-content: center;
+    gap: 24px;
+}
+
+#links > a {
+    text-decoration: none;
+    color: black;
+}
+
+main {
+    margin-bottom: 18px;
+}
+
+#common {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 36px;
+}
+
+#btn {
+    font-size: 14px;
+    background-color: aliceblue;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+#logout, #already-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 36px;
+}
+
+#profile-details {
+    padding-left: 36px;
+}
+
+#profile-details > div > img {
+    height: 250px;
+}
+
+#delete-action{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#delete-action > div {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+#card > span {
+    margin-bottom: 12px;
+}
+
+#card > div:nth-child(5) > h4, #card > div:nth-child(7) > h4 {
+    display: flex;
+    justify-content: center;
+}
+
+#card > div:nth-child(5) > ul, #card > div:nth-child(7) > ul {
+    list-style: none;
+    padding: 0;
+}
+
+#card > div:nth-child(5) > ul > li > div > a:nth-child(3) {
+    text-decoration: none;
+}
+
+#edit-delete-btns {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+#card > #edit-delete-photo-btns, #edit-delete-vacation-btns{
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+}
+
+
+#edit-delete-photo-btns > a, #edit-delete-vacation-btns > a {
+    display: flex;
+    text-decoration: none;
+}
+
+#destination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#destination-photos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+#destination-photos > img {
+    height: 600px;
+    margin-bottom: 12px;
+}
+
+#destination-photos > a > button {
+    margin-bottom: 12px;
+}
+
+#destination > span {
+    margin-bottom: 18px;
+}
+
+#card > div:nth-child(4) > ul {
+    list-style: none;
+}
+
+#no-destination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

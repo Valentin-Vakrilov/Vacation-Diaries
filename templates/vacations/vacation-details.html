@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div id="destination">
+        <h1 id="destination-name">
+            Destination: {{ vacation.destination }}
+        </h1>
+
+        <div id="destination-photos">
+            {% if vacation_photos %}
+                {% for photo in vacation_photos %}
+                    <p>Pictures description: {{ photo.description }}</p>
+                    {% if photo.photo_main %}
+                        <img src="{{ photo.photo_main.url }}" alt="Main Photo">
+                    {% endif %}
+
+                    {% if photo.photo_second %}
+                        <img src="{{ photo.photo_second.url }}" alt="Second Photo">
+                    {% endif %}
+
+                    {% if photo.photo_third %}
+                        <img src="{{ photo.photo_third.url }}" alt="Third Photo">
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>No uploaded photos for this vacation!</p>
+            {% endif %}
+        </div>
+
+        <span>
+            Vacation description: {{ vacation.description }}
+        </span>
+
+        <span>
+            Start date: {{ vacation.start_date }}
+        </span>
+
+        <span>
+            End date: {{ vacation.end_date }}
+        </span>
+
+        <span>
+            Rating (1 of 5): {{ vacation.rating }}
+        </span>
+
+        <span>
+            {% if vacation.budget %}
+                Budget: {{ vacation.budget }} BGN
+            {% else %}
+                Budget: Not specified
+            {% endif %}
+        </span>
+
+        <div>
+            {% if creator == request.user %}
+                <div id="edit-delete-vacation-btns">
+                    <a href="{% url "vacation_edit" vacation.pk %}">
+                        <button type="submit" id="btn">Edit Vacation</button>
+                    </a>
+                    <a href="{% url "vacation_delete" vacation.pk %}">
+                        <button type="submit" id="btn">Delete Vacation</button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

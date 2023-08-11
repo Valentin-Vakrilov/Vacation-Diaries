@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% if not user.is_authenticated %}
+        <form action="{% url "register" %}" method="post" id="common">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" id="btn">Register</button>
+        </form>
+        <div id="already-action">
+            <p>Already have account:</p>
+            <a href="{% url "login" %}">
+                <button type="submit" id="btn">Login</button>
+            </a>
+        </div>
+
+    {% else %}
+        <div id="logout">
+            <p>You are already registered!</p>
+            <a href="{% url "logout" %}">
+                <button type="submit" id="btn">Logout</button>
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}

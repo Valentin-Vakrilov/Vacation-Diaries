@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vacation diaries</title>
+    <link rel="stylesheet" href={% static "css/style.css" %}>
+    <link rel="stylesheet" href={% static "css/responsive.css" %}>
+</head>
+
+<body>
+<header>
+    <nav>
+        <a href="{% url "index" %}" id="logo">
+            <img src="{% static "app_images/logo.gif" %}" alt="logo">
+        </a>
+
+        {% if request.user.is_authenticated %}
+            <ul id="logged">
+                <li>
+                    <i class="fas fa-plane-departure"></i>
+                    <a href="{% url "vacation_add" %}">Add new vacation</a>
+                </li>
+                <li>
+                    <i class="fas fa-camera"></i>
+                    <a href="{% url "photo_add" %}">Add new photo</a>
+                </li>
+                <li>
+                    <i class="fas fa-user"></i>
+                    <a href="{% url "profile_details" request.user.pk %}">Profile</a>
+                </li>
+                <li>
+                    <i class="fas fa-sign-out-alt"></i>
+                    <a href="{% url "logout" %}">Logout</a>
+                </li>
+            </ul>
+        {% else %}
+            <ul id="not-logged">
+                <li>
+                    <i class="fas fa-sign-in-alt"></i>
+                    <a href="{% url "login" %}">Login</a>
+                </li>
+                <li>
+                    <i class="fas fa-concierge-bell"></i>
+                    <a href="{% url "register" %}">Register</a>
+                </li>
+            </ul>
+        {% endif %}
+    </nav>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <span id="social">
+        <i class="fab fa-facebook-square"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-youtube"></i>
+        <i class="fab fa-linkedin"></i>
+    </span>
+    <span id="links">
+            <a href="#">Terms and Conditions</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact Us</a>
+        </span>
+    <span id="trade-mark">
+			© 2023 SOFTUNI WORKSHOP FOR PYTHON WEB MODULE
+    </span>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <form action="{% url "vacation_add" %}" method="post" id="common">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" id="btn">Submit</button>
+    </form>
+
+{% endblock %}

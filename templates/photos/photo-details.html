@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div id="card">
+        <div id="picture">
+            {% if photo.photo_main %}
+                <img src="{{ photo.photo_main.url }}" alt="Main Photo">
+            {% elif photo.photo_second %}
+                <img src="{{ photo.photo_second.url }}" alt="Second Photo">
+            {% elif photo.photo_third %}
+                <img src="{{ photo.photo_third.url }}" alt="Third Photo">
+            {% endif %}
+        </div>
+        <div>
+            Description: {{ photo.description }}
+        </div>
+
+        <div>
+            Destination: {{ photo.vacation.destination }}
+        </div>
+
+        {% if creator == request.user %}
+            <div id="edit-delete-photo-btns">
+                <a href="{% url "photo_edit" photo.pk %}">
+                    <button type="submit" id="btn">Edit Photo</button>
+                </a>
+                <a href="{% url "photo_delete" photo.pk %}">
+                    <button type="submit" id="btn">Delete Photo</button>
+                </a>
+            </div>
+        {% endif %}
+
+        <span>Total likes: {{ photo.likes.count }}</span>
+
+        {% if request.user.is_authenticated %}
+            {% if request.user in photo.likes.all %}
+                <a href="{% url "photo_like_toggle" photo.pk %}">
+                    <button type="submit" id="btn">Unlike Picture</button>
+                </a>
+            {% else %}
+                <a href="{% url "photo_like_toggle" photo.pk %}">
+                    <button type="submit" id="btn">Like Picture</button>
+                </a>
+            {% endif %}
+        {% endif %}
+
+        <div>
+            {% if comments.count > 0 %}
+                <h4>Comments</h4>
+                <ul>
+                    {% for comment in comments %}
+                        <li>
+                            <div>
+                                <p>{{ request.user }} posted
+                                    on {{ comment.publication_date_and_time }}</p>
+                                <p>{{ comment.comment_text }}</p>
+                                {% if creator == request.user %}
+                                    <div id="edit-delete-btns">
+                                        <a href="{% url "photo_comment_edit" comment.pk %}">
+                                            <button type="submit" id="btn">Edit Comment</button>
+                                        </a>
+                                        <a href="{% url "photo_comment_delete" comment.pk %}">
+                                            <button type="submit" id="btn">Delete Comment</button>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No comments yet</p>
+            {% endif %}
+        </div>
+
+        {% if request.user.is_authenticated %}
+            <a href="{% url "photo_comment_add" photo.pk %}">
+                <button type="submit" id="btn">Add comment</button>
+            </a>
+        {% endif %}
+    </div>
+
+{% endblock %}

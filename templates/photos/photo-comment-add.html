@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+        <form action="{% url "photo_comment_add" photo_pk %}" method="post">
+            <input type="hidden" name="photo" value="{{ photo.pk }}">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button>Submit</button>
+        </form>
+
+    {% else %}
+        <div id="already-action">
+            <p>You must be logged to comment a photo</p>
+            <a href="{% url "login" %}">
+                <button type="submit" id="btn">Login</button>
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}
